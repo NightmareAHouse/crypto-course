@@ -1,0 +1,16 @@
+{
+  "name": "crypto-course-back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main/main.js",
+  "scripts": {
+    "build": "npm i && cd ./main && node main.js"
+  },
+  "author": "Kirills Meletins",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "node-binance-api": "^0.12.5"
+  }
+}
