@@ -4,6 +4,6 @@
 
 Write in Terminal: 
 
-cd back-end
+    **CD back-end**
 
-npm run build
+    **npm run build**
