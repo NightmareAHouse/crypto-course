@@ -4,7 +4,9 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "build": "npm i && cd src && node main.js && node update-data-in-database.js"
+    "build": "npm i && cd src && node main.js && node update-data-in-database.js",
+    "start": "node src/main.js",
+    "dev": "nodemon src/main.js"
   },
   "author": "Kirills Meletins",
   "license": "ISC",
@@ -14,6 +16,7 @@
     "node-binance-api": "^0.12.5"
   },
   "devDependencies": {
-    "mysql2": "^2.2.5"
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.12"
   }
 }

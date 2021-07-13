@@ -8,19 +8,22 @@ const binance = new Binance().options({
 })
 
 function getAllName(index) {
-    binance.bookTickers(async (error, ticker) => {
-        console.log(index);
-        if(index === ticker.length)
-            index = 0;
-        for (index; index <= (index + 10); index++) {
-            await getBidsAndAsks(ticker[index]['symbol']);
+    let loop_limiter = index + 35;
+    binance.bookTickers((error, ticker) => {
+        if (loop_limiter >= ticker.length)
+            loop_limiter = ticker.length;
+        for (index; index < loop_limiter; index++) {
+            getBidsAndAsks(ticker[index]['symbol']).catch(console.log);
         }
+        if (index === ticker.length)
+            index = 0;
+        console.log(index);
+        setTimeout(getAllName, 9000, index)
     })
-    // setTimeout(getAllName, 10000, index);
 }
 
 async function getBidsAndAsks(array) {
-    binance.websockets.depthCache(array, async (symbol, depth) => {
+    binance.websockets.depthCache(array, (symbol, depth) => {
         let date = new Date();
         let time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
         let bids = binance.sortBids(depth.bids);
@@ -37,20 +40,19 @@ async function getBidsAndAsks(array) {
                 time: time
             }
         });
-        try {
-            await axios.get(restRequestOptions)
-                .then(r => {
-                    console.info(symbol + " depth cache update");
-                    console.info("best bid: " + binance.first(bids));
-                    console.info("best ask: " + binance.first(asks));
-                    console.log(r);
-                })
-        } catch (error) {
-            console.log("That did not go well.");
-            throw error
+        axios.get(restRequestOptions)
+            .then().catch(console.log)
+        console.info(symbol + " depth cache update");
+        console.info("best bid: " + binance.first(bids));
+        console.info("best ask: " + binance.first(asks));
+        let endpoints = binance.websockets.subscriptions();
+        for (let endpoint in endpoints) {
+            let ws = endpoints[endpoint];
+            ws.terminate();
         }
     });
 }
 
-let index = 0;
+let index = 0
 getAllName(index);
+

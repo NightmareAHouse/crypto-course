@@ -62,8 +62,10 @@ async function updateDataInDB(req) {
         req.query.instrument], function (err, rows) {
         if (err)
             console.log("Error: " + err.message);
-        else
+        else {
+            console.log(req.query.instrument);
             console.log(rows);
+        }
     })
 }
 
