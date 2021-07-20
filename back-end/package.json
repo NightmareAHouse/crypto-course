@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "build": "npm i && cd src && node main.js && node update-data-in-database.js",
+    "build": "npm i && node src/main.js",
     "start": "node src/main.js",
     "dev": "nodemon src/main.js"
   },
@@ -13,7 +13,10 @@
   "dependencies": {
     "axios": "^0.21.1",
     "express": "^4.17.1",
-    "node-binance-api": "^0.12.5"
+    "js-yaml": "^4.1.0",
+    "node-binance-api": "^0.12.5",
+    "websocket": "^1.0.34",
+    "ws": "^7.5.3"
   },
   "devDependencies": {
     "mysql2": "^2.2.5",

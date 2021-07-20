@@ -1,0 +1,12 @@
+db:
+  url: mysql://user:pass@ipaddr:port/database
+flush_periud_s: 5
+instruments:
+  - name: BTCUSDT
+  - name: Eth-usd-synth-1
+    dependents:
+      - ETHBCH
+      - USDBCH
+
+data:
+  para:
